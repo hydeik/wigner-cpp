@@ -2,7 +2,9 @@ cmake_minimum_required (VERSION 3.2.0)
 
 project(WignerCpp CXX)
 
-option(BUILD_TEST "Build tests" ON)
+include(GNUInstallDirs)
+
+option(BUILD_TEST "Build tests" OFF)
 option(BUILD_DOCUMENTATION "Build API documents (requires Doxygen)" OFF)
 
 # Guard against in-source builds
@@ -43,9 +45,6 @@ target_compile_features(WignerCpp
 install(TARGETS WignerCpp EXPORT WignerCppConfig INCLUDES DESTINATION "include")
 install(EXPORT WignerCppConfig DESTINATION "lib/cmake/wigner-cpp")
 install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-
-# This makes the project importable from the build directory
-#export(TARGETS WignerCpp FILE WignerCppConfig.cmake)
 
 # Building API documentation with Doxygen
 if(BUILD_DOCUMENTATION)
