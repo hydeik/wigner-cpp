@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.2.0)
 
-project(WignerCpp CXX)
+project(wigner-cpp CXX)
 
 include(GNUInstallDirs)
 
@@ -30,20 +30,20 @@ add_subdirectory(include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # Library definitions
-add_library(WignerCpp INTERFACE)
+add_library(wigner-cpp INTERFACE)
 
-target_include_directories(WignerCpp INTERFACE
+target_include_directories(wigner-cpp INTERFACE
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
   )
 
-target_compile_features(WignerCpp
+target_compile_features(wigner-cpp
   INTERFACE cxx_alias_templates cxx_auto_type cxx_constexpr cxx_decltype
   cxx_defaulted_functions cxx_defaulted_move_initializers cxx_lambdas
   )
 
-install(TARGETS WignerCpp EXPORT WignerCppConfig INCLUDES DESTINATION "include")
-install(EXPORT WignerCppConfig DESTINATION "lib/cmake/wigner-cpp")
+install(TARGETS wigner-cpp EXPORT wigner-cpp-config INCLUDES DESTINATION "include")
+install(EXPORT wigner-cpp-config DESTINATION "lib/cmake/wigner-cpp")
 install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 # Building API documentation with Doxygen
