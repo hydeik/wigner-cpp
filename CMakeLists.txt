@@ -9,7 +9,7 @@ option(BUILD_DOCUMENTATION "Build API documents (requires Doxygen)" OFF)
 
 # Guard against in-source builds
 if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
-    message(FATAL_ERROR "\
+  message(FATAL_ERROR "\
 In-source builds not allowed. Please make a new directory \
 (called a build directory) and run CMake from there. \
 (you may need to remove CMakeCache.txt")
@@ -22,7 +22,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Additional CMake module path
 if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
-    set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+  set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 endif()
 
 # directory structure
@@ -33,14 +33,14 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 add_library(WignerCpp INTERFACE)
 
 target_include_directories(WignerCpp INTERFACE
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:include>
-    )
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+  )
 
 target_compile_features(WignerCpp
-    INTERFACE cxx_alias_templates cxx_auto_type cxx_constexpr cxx_decltype
-    cxx_defaulted_functions cxx_defaulted_move_initializers cxx_lambdas
-    )
+  INTERFACE cxx_alias_templates cxx_auto_type cxx_constexpr cxx_decltype
+  cxx_defaulted_functions cxx_defaulted_move_initializers cxx_lambdas
+  )
 
 install(TARGETS WignerCpp EXPORT WignerCppConfig INCLUDES DESTINATION "include")
 install(EXPORT WignerCppConfig DESTINATION "lib/cmake/wigner-cpp")
@@ -48,30 +48,30 @@ install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 # Building API documentation with Doxygen
 if(BUILD_DOCUMENTATION)
-    find_package(Doxygen)
+  find_package(Doxygen)
 
-    if(NOT DOXYGEN_FOUND)
-        message(FATAL_ERROR "Doxygen is needed to build the documentation.")
-    endif()
+  if(NOT DOXYGEN_FOUND)
+    message(FATAL_ERROR "Doxygen is needed to build the documentation.")
+  endif()
 
-    set(doxyfile_in ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in)
-    set(doxyfile ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
+  set(doxyfile_in ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in)
+  set(doxyfile ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
 
-    configure_file(${doxyfile_in} ${doxyfile} @ONLY)
+  configure_file(${doxyfile_in} ${doxyfile} @ONLY)
 
-    add_custom_target(
-        doc
-        COMMAND ${DOXYGEN_EXECUTABLE} ${doxyfile}
-        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-        COMMENT "Generating API documentation with Doxygen" VERBATIM
-        )
+  add_custom_target(
+    doc
+    COMMAND ${DOXYGEN_EXECUTABLE} ${doxyfile}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    COMMENT "Generating API documentation with Doxygen" VERBATIM
+    )
 
-    install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html DESTINATION share/doc)
+  install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html DESTINATION share/doc)
 endif()
 
 # Build test
 if (BUILD_TEST)
-    enable_testing()
-    find_package(catch REQUIRED CONFIG)
-    add_subdirectory(test)
+  enable_testing()
+  find_package(catch REQUIRED CONFIG)
+  add_subdirectory(test)
 endif()
