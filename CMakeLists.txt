@@ -21,19 +21,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Additional CMake module path
-if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+if (EXISTS ${PROJECT_SOURCE_DIR}/cmake)
   set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 endif()
 
 # directory structure
 add_subdirectory(include)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+#include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # Library definitions
 add_library(wigner-cpp INTERFACE)
 
 target_include_directories(wigner-cpp INTERFACE
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
   $<INSTALL_INTERFACE:include>
   )
 
