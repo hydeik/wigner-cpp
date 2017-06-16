@@ -29,8 +29,10 @@
 #ifndef WIGNER_WIGNER_HPP
 #define WIGNER_WIGNER_HPP
 
+#include "binomial.hpp"
 #include "constants.hpp"
 #include "gaunt.hpp"
+#include "spherical_harmonic.hpp"
 #include "wigner_3nj.hpp"
 
 #endif /* WIGNER_WIGNER_HPP */
