@@ -45,7 +45,7 @@ class BinomialTable
 public:
     using Scalar    = T;
     using Container = std::vector<T>;
-    using SizeType  = typename Container::SizeType;
+    using SizeType  = typename Container::size_type;
 
 private:
     SizeType m_nmax;
